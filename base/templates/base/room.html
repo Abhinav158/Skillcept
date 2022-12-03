@@ -21,6 +21,10 @@
             <hr>
             {% for message in room_messages %}
                 <div>
+                    <!-- Comment Delete Functinality -->
+                    {% if request.user == message.user %}
+                        <a href="{% url 'delete-message' message.id %}">Delete</a>
+                    {% endif %}
                     <!-- Output the username along with the message sent by that user -->
                     <!-- Also add how long ago the message was posted -->
                     <small>{{message.user}}  {{message.created|timesince}} ago</small>
