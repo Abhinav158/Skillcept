@@ -2,4 +2,16 @@
     <h1> Logo </h1>
 </a>
 
+
+<form method="GET" action="{% url 'home' %}">
+    <input type="text" name="q" placeholder="Search Rooms..." />
+</form>
+
+<!-- If the user has already logged in, give option to logout -->
+{% if request.user.is_authenticated %}
+<p>Hello {{request.user}}</p>
+<a href="{% url 'logout' %}">Logout</a>
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+{% endif %}
 <hr>

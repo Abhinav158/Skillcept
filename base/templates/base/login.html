@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% if page == 'login' %}
+<!-- Login Page -->
+<div>
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <label >Username: </label>
+        <input type="text" name="username" placeholder="Enter Username" />
+
+        <label >Password: </label>
+        <input type="password" name="password" placeholder="Enter Password" />
+
+        <input type="submit" value="Login" />
+    </form>
+
+    <p>Haven't Signed Up yet ?</p>
+    <a href="{% url 'register' %}">Sign Up</a>
+</div>
+{% else %}
+<!-- Register Page -->
+<div>
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <!-- User Django forms to Sign a New user up -->
+        {{form.as_p}}
+        <!-- Autogenerate the form fields in this case  -->
+        <input type="submit" value="Register" />
+    </form>
+
+    <p>Already Have an Account ?</p>
+    <a href="{% url 'login' %}">Login</a>
+</div>
+{% endif %}
+
+{% endblock %}
