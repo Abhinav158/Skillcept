@@ -2,7 +2,9 @@ from django.contrib import admin
 
 # This is where we register all our models to be able to access it in Django Admin panel 
 
-from .models import Room
+from .models import Room, Topic, Message 
 
 admin.site.register(Room)
+admin.site.register(Topic)
+admin.site.register(Message)
 
