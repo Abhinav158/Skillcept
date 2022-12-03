@@ -31,6 +31,10 @@ class Room(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    # We want the newly updated or created room to update on top 
+    class Meta:
+        ordering = ['-updated', '-created']
+
     # String Representation
     def __str__(self):
         return self.name
