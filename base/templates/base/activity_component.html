@@ -1,0 +1,17 @@
+<!-- When you go to someones profile, you want to be able to see their activity -->
+
+    <h3>Recent Activity</h3>
+        <hr>
+        {% for message in room_messages %}
+            <div>
+                <small>@{{message.user}} {{message.created|timesince}}</small>
+                <small>" {{message.room}}"</small>
+                <p>{{message}}</p>
+
+                <!-- Comment Delete Functinality -->
+                {% if request.user == message.user %}
+                <a href="{% url 'delete-message' message.id %}">Delete</a>
+                {% endif %}
+                <hr>
+            </div>
+        {% endfor %}

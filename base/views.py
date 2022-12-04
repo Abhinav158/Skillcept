@@ -76,8 +76,9 @@ def home(request):
 
     topics = Topic.objects.all()
     room_count = rooms.count()
+    room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
 
-    context = {'rooms': rooms, 'topics': topics, 'room_count': room_count}
+    context = {'rooms': rooms, 'topics': topics, 'room_count': room_count, 'room_messages': room_messages}
     return render(request, 'base/home.html', context)
 
 
@@ -85,7 +86,7 @@ def room(request, pk):
     room = Room.objects.get(id=pk) 
     # Get the set of messages related to one particular room 
     # Display the comment list with the most recent message on top
-    room_messages = room.message_set.all().order_by('-created')
+    room_messages = room.message_set.all()
     participants = room.participants.all()
     if request.method == 'POST':
         # Go ahead and create a message  
