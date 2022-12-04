@@ -4,7 +4,20 @@
 # Every time we make an instance of the class, it is creating a new row in the table 
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+# Custom User Model 
+# Since we are using email to login, we need to make emails unique 
+class User(AbstractUser):
+    name = models.CharField(max_length=200, null=True)
+    email = models.EmailField(null=True, unique=True)
+    bio = models.TextField(null=True)
+    
+    # Profile picture
+    avatar = models.ImageField(null=True, default='nophoto.svg')
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS =  []
 
 class Topic(models.Model):
     name = models.CharField(max_length=200)
