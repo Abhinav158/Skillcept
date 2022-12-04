@@ -19,6 +19,6 @@ from django.urls import path, include
 # We want to connect this to the URLS in the app base - done using include 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('base.urls'))
-
+    path('', include('base.urls')),
+    path('api/', include('base.api.urls')),
 ]
