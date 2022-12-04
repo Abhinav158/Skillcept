@@ -9,7 +9,7 @@ from django.contrib.auth.models import AbstractUser
 # Custom User Model 
 # Since we are using email to login, we need to make emails unique 
 class User(AbstractUser):
-    name = models.CharField(max_length=200, null=True)
+    name = models.CharField(max_length=200, null=True, unique=True)
     email = models.EmailField(null=True, unique=True)
     bio = models.TextField(null=True)
     
