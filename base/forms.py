@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from .models import Room
+from django.contrib.auth.models import User
 
 class RoomForm(ModelForm):
 
@@ -10,3 +11,9 @@ class RoomForm(ModelForm):
         # The host should automatically become the user who is creating the room
         exclude = ['host', 'participants']
         
+
+class UserForm(ModelForm):
+
+    class Meta:
+        model = User 
+        fields = ['username', 'email']
