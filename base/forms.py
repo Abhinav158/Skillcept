@@ -7,4 +7,6 @@ class RoomForm(ModelForm):
     class Meta:
         model = Room
         fields = '__all__'
+        # The host should automatically become the user who is creating the room
+        exclude = ['host', 'participants']
         
