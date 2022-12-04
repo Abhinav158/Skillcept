@@ -26,7 +26,7 @@ def loginPage(request):
         try:
             user = User.objects.get(email=email)
         except:
-            messages.error(request, 'User does not exist')
+            messages.error(request, '')
         
         # Gives an error or given a user object that matches the credentials 
         user = authenticate(request, email=email, password=password)
@@ -36,7 +36,7 @@ def loginPage(request):
             login(request, user)
             return redirect ('home')
         else:
-            messages.error(request, 'Username OR Password does not exist')
+            messages.error(request, 'Username or Password does not exist')
 
         
     context = {'page': page}
