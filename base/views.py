@@ -74,7 +74,8 @@ def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     rooms = Room.objects.filter(Q(topic__name__icontains=q) | Q(name__icontains=q) | Q(description__icontains=q))
 
-    topics = Topic.objects.all()
+    # Give us only first  5 topics to be displayed on screen - rest from 'More'
+    topics = Topic.objects.all()[0:5]
     room_count = rooms.count()
     room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
 
@@ -205,3 +206,17 @@ def updateUser(request):
     context = {'form': form}
     return render(request, 'base/update-user.html', context)
 
+def topicsPage(request):
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    topics = Topic.objects.filter(name__icontains=q)
+    context = {'topics': topics}
+    return render(request, 'base/topics.html', context)
+
+# Stores all activity on the website 
+def activityPage(request):
+
+    # get all the messages and pass them into the template 
+    room_messages = Message.objects.all()
+
+    context = {'room_messages': room_messages}
+    return render(request, 'base/activity.html', context)
